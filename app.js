@@ -1,9 +1,5 @@
-const evtSource = new EventSource('sse.php');
-const eventList = document.querySelector('ul');
+const evtSource = new EventSource('http://localhost:5000');
 
 evtSource.onmessage = function(e) {
-  const newElement = document.createElement("li");
-
-  newElement.textContent = "message: " + e.data;
-  eventList.appendChild(newElement);
+    console.log("Event --> ", e)
 }
