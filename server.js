@@ -9,7 +9,7 @@ app.use(async (ctx) => {
     })
     
     ctx.type = "text/event-stream";
-    const data = { "time": Date.now() }
+    const data = { "time": Math.round(Math.random() * 1000) }
     ctx.body = `data: ${JSON.stringify(data)}\n\n`
 });
 
