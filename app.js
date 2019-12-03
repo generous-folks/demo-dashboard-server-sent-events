@@ -19,11 +19,20 @@ const chart = new ApexCharts(document.getElementById('chart'), options);
 
 chart.render();
 
+evtSource.onopen = function () {
+    console.log("OPENED")
+}
+
 evtSource.onmessage = function(e) {
+    console.log("new message")
     seriesData.push(JSON.parse(e.data).time)
     setTimeout(() => {
         chart.updateSeries([{
             data: seriesData
         }])
     }, 2000)
+}
+
+evtSource.onerror = function(e) {
+    console.log('merde', e)
 }
