@@ -25,11 +25,12 @@ evtSource.onopen = function () {
 
 evtSource.onmessage = function (e) {
   seriesData.push(JSON.parse(e.data).time)
-  setTimeout(() => {
-    chart.updateSeries([{
-      data: seriesData
-    }])
-  }, 2000)
+
+  if(seriesData.length === 30) seriesData.shift()
+
+  chart.updateSeries([{
+    data: seriesData
+  }])
 }
 
 evtSource.onerror = function (e) {

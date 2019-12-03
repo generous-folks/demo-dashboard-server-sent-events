@@ -41,6 +41,6 @@ http.createServer((req, res) => {
       }
       res.write(`data: ${JSON.stringify(data)}`)
       res.write("\n\n")
-    }, 1000)
+    }, 500)
   })
   .listen(PORT, () => console.log(`http://localhost:${PORT}`))
