@@ -24,3 +24,25 @@ app.use(async (ctx) => {
 });
 
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`))
+
+// const http = require("http")
+
+// http.createServer((req, res) => {
+//     res.writeHead(200, {
+//         "Content-Type": "text/event-stream",
+//         "Access-Control-Allow-Origin": "*",
+//         "Connection": "keep-alive",
+//         'Cache-Control': 'no-cache'
+//     })
+
+//     setInterval(() => {
+//         const data = { "time": Math.round(Math.random() * 100) }
+//         res.write(`data: ${JSON.stringify(data)}`)
+//         res.write("\n\n")
+//     }, 1000)
+
+//         const data = { "time": Math.round(Math.random() * 100) }
+//         res.write(`data: ${JSON.stringify(data)}`)
+//         res.write("\n\n")
+//     })
+//     .listen(PORT, () => console.log(`http://localhost:${PORT}`))
