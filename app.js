@@ -1,38 +1,34 @@
-const evtSource = new EventSource('http://localhost:5000');
+import c3 from "c3";
 
-const seriesData = []
+const evtSource = new EventSource("http://localhost:5000");
 
-const options = {
-  chart: {
-    type: 'area'
+const data = [30, 20, 10, 40, 15, 25];
+
+const chart = c3.generate({
+  bindto: "#chart",
+  data: {
+    type: "area",
+    columns: [["Random", ...data]]
   },
-  series: [{
-    name: 'area',
-    data: []
-  }],
-  xaxis: {
-    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+  bar: {},
+  axis: {
+    y: {
+      max: 200,
+      min: 0
+    }
   }
-}
+});
 
-const chart = new ApexCharts(document.getElementById('chart'), options);
+evtSource.onmessage = function(e) {
+  if (data.length === 10) data.shift();
 
-chart.render();
+  data.push(JSON.parse(e.data).time);
 
-evtSource.onopen = function () {
-  console.log("OPENED")
-}
+  chart.load({
+    columns: [["Random", ...data]]
+  });
+};
 
-evtSource.onmessage = function (e) {
-  seriesData.push(JSON.parse(e.data).time)
-
-  if(seriesData.length === 30) seriesData.shift()
-
-  chart.updateSeries([{
-    data: seriesData
-  }])
-}
-
-evtSource.onerror = function (e) {
-  console.log('merde', e)
-}
+evtSource.onerror = function(e) {
+  console.error("lance le serveur");
+};
