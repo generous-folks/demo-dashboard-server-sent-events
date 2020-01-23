@@ -19,10 +19,14 @@ const chart = c3.generate({
   }
 });
 
+evtSource.onopen = function() {
+  console.log("Ah bogaaaas");
+};
+
 evtSource.onmessage = function(e) {
   if (data.length === 10) data.shift();
 
-  data.push(JSON.parse(e.data).time);
+  data.push(JSON.parse(e.data).value);
 
   chart.load({
     columns: [["Random", ...data]]

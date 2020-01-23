@@ -37,13 +37,11 @@ http
     res.writeHead(200, {
       "Content-Type": "text/event-stream",
       "Access-Control-Allow-Origin": "*",
-      Connection: "keep-alive",
-      "Cache-Control": "no-cache"
     });
 
     setInterval(() => {
       const data = {
-        time: randomInt()
+        value: randomInt()
       };
       res.write(`data: ${JSON.stringify(data)}`);
       res.write("\n\n");
